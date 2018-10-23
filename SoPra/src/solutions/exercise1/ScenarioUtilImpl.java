@@ -21,6 +21,7 @@ import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
+
 	public Set<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) {
 		if (scenario == null && type != null) {
 		//check for null parameters
@@ -74,18 +75,13 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 	@Override
 	public String getTeamIdentifier() {
 	    // TODO Auto-generated method stub
-	    return "group6Team2";
+	    return null;
 	}
 
 
 	@Override
 	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode,PowerLine> graph, PowerLineType type) {
 		return null;
 	}
 

@@ -23,18 +23,18 @@ import org.sopra.api.model.producer.Producer;
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
 	public Set<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) {
-		if (scenario == null && type != null) {
+		if (scenario == null || type == null) {
 		//check for null parameters
 			throw new NullPointerException("Parameter is not allowed to be null.");
 			//if at least 1 parameter is null, then throw the exception
-		}
+		} 
 		Deque<PlayfieldElement> ret = new ArrayDeque<>();
 		// A Deque is a Double-Ended-Queue. A Queue is a special List, where you just can add something new at the beginning
-		for (int x = 1; x < scenario.getPlayfield().getHorizontalSize()-1; x++) {
+		for (int x = 0; x < scenario.getPlayfield().getHorizontalSize(); x++) {
 		//Iterate over the whole play field in horizontal direction (x-axes)
-			for (int y = scenario.getPlayfield().getVerticalSize(); y > 0; y--) {
+			for (int y = scenario.getPlayfield().getVerticalSize()-1; y >= 0; y--) {
 				//Iterate over the whole play field in vertical direction (y-axes)
-				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(y, x);
+				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(x, y);
 				//Take the play field element by the iterated position (x,y)
 				if (element.getElementType() == type) {
 				//check if the element type is the same as the searched one
@@ -82,6 +82,12 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 	@Override
 	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode,PowerLine> graph,
+            PowerLineType type) {
 		return null;
 	}
 

@@ -132,7 +132,7 @@
         <node id="14" type="industrialPark" name="Apel Automotive" xpos="4" ypos="1" />
         <node id="15" type="industrialPark" name="WASF" xpos="5" ypos="7" />
         <node id="16" type="industrialPark" name="Buyer Medical Care" xpos="5" ypos="8" />
-        <node id="17" type="commercialPark" name="Hedge Services" xpos="6" ypos="6" />
+        <node id="17" type="commercialPark" name="Hedge Services" xpos="5" ypos="6" />
 	</nodes>
 
 	<edges>

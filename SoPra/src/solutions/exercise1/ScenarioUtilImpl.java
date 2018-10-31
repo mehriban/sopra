@@ -44,7 +44,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		}
 		List<PlayfieldElement> result = new ArrayList<PlayfieldElement>(ret);
 		return result;
-		// give the result back
+		// give the result back test github
 	}
 
 

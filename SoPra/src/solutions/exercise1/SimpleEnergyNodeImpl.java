@@ -1,4 +1,7 @@
 package solutions.exercise1;
+
+import org.sopra.api.exercises.ExerciseSubmission;
+
 /**
  * This abstract class represents a simple energy node and implements the interfaces 
  * SimplEnergyNode.java and ExerciseSubmission.java.

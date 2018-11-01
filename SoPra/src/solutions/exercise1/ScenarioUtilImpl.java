@@ -4,9 +4,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.sopra.api.Scenario;
 import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise1.ScenarioUtil;
@@ -24,9 +21,6 @@ import org.sopra.api.model.producer.Producer;
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
 	@Override
-	/**
-	 * 
-	 */
 	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
 		if (scenario == null || type == null) {
 		//check for null parameters
@@ -53,9 +47,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		// give the result back
 	}
 
-	/**
-	 * 
-	 */
+
 	@Override
 	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
@@ -69,18 +61,15 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 				result.add((ControllableProducer) node);
 		}
 		return result;
-		
 	}
-	/**
-	 * 
-	 */
+
 	@Override
 	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 		}
 		
-		Set<EnergyNode> nodes = new TreeSet<EnergyNode>(graph.getNodes());
+		List<EnergyNode> nodes = new ArrayList<EnergyNode>(graph.getNodes());
 		List<ControllableConsumer> result = new ArrayList<ControllableConsumer>();
 		for (EnergyNode node : nodes) {
 			if (node instanceof ControllableConsumer)
@@ -95,7 +84,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 		}
 		
-		Set<EnergyNode> nodes = new TreeSet<EnergyNode>(graph.getNodes());
+		List<EnergyNode> nodes = new ArrayList<EnergyNode>(graph.getNodes());
 		List<Producer> result = new ArrayList<Producer>();
 		for (EnergyNode node : nodes) {
 			if (node instanceof Producer)
@@ -110,7 +99,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 		}
 		
-		Set<EnergyNode> nodes = new TreeSet<EnergyNode>(graph.getNodes());
+		List<EnergyNode> nodes = new ArrayList<EnergyNode>(graph.getNodes());
 		List<Consumer> result = new ArrayList<Consumer>();
 		for (EnergyNode node : nodes) {
 			if (node instanceof Consumer)

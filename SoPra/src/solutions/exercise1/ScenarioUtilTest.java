@@ -178,9 +178,12 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 		}
 
 	}
-
+	
+	/**
+	 * Returns team identifier
+	 */
 	@Override
 	public String getTeamIdentifier() {
-		return "Group 6 Team 02";
+		return "G06T02AB1";
 	}
 }

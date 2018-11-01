@@ -18,8 +18,19 @@ import org.sopra.api.model.consumer.ControllableConsumer;
 import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 
+/**
+ * This class implements the abstract class ScenariUtil and
+ * provides helper methods for scenarios
+ * @author Mehriban Kurbanova
+ *
+ */
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
-
+	
+	/**
+	 * Returns playfield elements from the given scenario by the given typ
+	 * @param scenario the given scenario
+	 * @param typ the given type
+	 */
 	@Override
 	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
 		if (scenario == null || type == null) {
@@ -47,7 +58,10 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		// give the result back
 	}
 
-
+	/**
+	 * Returns controllable producers for the given graph
+	 * @param graph the given graph
+	 */
 	@Override
 	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
@@ -62,7 +76,11 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Returns controllable consumers from the given graph
+	 * @param graph the given graph
+	 */
 	@Override
 	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
@@ -77,7 +95,11 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Returns all producers from the given graph
+	 * @param graph the given graph
+	 */
 	@Override
 	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
@@ -92,7 +114,11 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Returns all consumers from the given graph
+	 * @param the given graph
+	 */
 	@Override
 	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) {
 		if (graph == null) {
@@ -108,11 +134,19 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		return result;
 	}
 
+	/**
+	 * Returns team identifier
+	 */
 	@Override
 	public String getTeamIdentifier() {
-	    return "Group 6 Team 02";
+	    return "G06T02AB1";
 	}
 	
+	/**
+	 * Returns all power lines from the given graph by the given type
+	 * @param graph the given graph
+	 * @param type the given type
+	 */
 	@Override
 	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph,
             PowerLineType type) {

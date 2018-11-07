@@ -1,10 +1,7 @@
 package solutions.exercise1;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.sopra.api.Scenario;
 import org.sopra.api.exercises.ExerciseSubmission;
@@ -22,68 +19,101 @@ import org.sopra.api.model.producer.Producer;
 
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
-	public Set<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) {
-		if (scenario == null || type == null) { // type != null -> type == null | && -> ||
-		//check for null parameters
-			throw new NullPointerException("Parameter is not allowed to be null.");
-			//if at least 1 parameter is null, then throw the exception
+	@Override
+	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
+		if (scenario == null || type == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 		}
-		Deque<PlayfieldElement> ret = new ArrayDeque<>();
-		// A Deque is a Double-Ended-Queue. A Queue is a special List, where you just can add something new at the beginning
-		for (int x = 0; x < scenario.getPlayfield().getHorizontalSize(); x++) { //x = 1 -> x = 0 | -1 hinter getHorizontalsize weg
-		//Iterate over the whole play field in horizontal direction (x-axes)
-			for (int y = scenario.getPlayfield().getVerticalSize()-1; y >= 0; y--) { //-1 hinter getverticalsize | y>0 -> y>=0
-				//Iterate over the whole play field in vertical direction (y-axes)
-				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(x, y); // x und y vertauscht in klammer
-				//Take the play field element by the iterated position (x,y)
+
+		List<PlayfieldElement> ret = new ArrayList<>();
+		for (int x = 0; x < scenario.getPlayfield().getHorizontalSize(); x++) {
+			for (int y = 0; y < scenario.getPlayfield().getVerticalSize(); y++) {
+				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(x, y);
 				if (element.getElementType() == type) {
-				//check if the element type is the same as the searched one
 					ret.add(element);
-					//if it is the same, then add the current play field element to the result list
 				}
 			}
 		}
-		return new HashSet<>(ret);
-		// give the result back
+		return ret;
 	}
 
+	@Override
+	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph, PowerLineType type) {
+		if (graph == null || type == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
+		}
+
+		List<PowerLine> ret = new ArrayList<>();
+		for (PowerLine line : graph.getEdges()) {
+			if (line.getType() == type)
+				ret.add(line);
+		}
+		return ret;
+	}
 
 	@Override
 	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) {
-	    // TODO Auto-generated method stub
-	    return null;
+		if (graph == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
+		}
+
+		List<ControllableProducer> ret = new ArrayList<ControllableProducer>();
+		for (EnergyNode node : graph.getNodes()) {
+			if (node instanceof ControllableProducer) {
+				ret.add((ControllableProducer) node);
+			}
+		}
+		return ret;
 	}
 
 	@Override
 	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) {
-	    // TODO Auto-generated method stub
-	    return null;
+		if (graph == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
+		}
+
+		List<ControllableConsumer> ret = new ArrayList<ControllableConsumer>();
+		for (EnergyNode node : graph.getNodes()) {
+			if (node instanceof ControllableConsumer) {
+				ret.add((ControllableConsumer) node);
+			}
+		}
+		return ret;
 	}
 
 	@Override
 	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) {
-	    // TODO Auto-generated method stub
-	    return null;
+		if (graph == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
+		}
+
+		List<Producer> ret = new ArrayList<Producer>();
+		for (EnergyNode node : graph.getNodes()) {
+			if (node instanceof Producer) {
+				ret.add((Producer) node);
+			}
+		}
+		return ret;
 	}
 
 	@Override
 	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) {
-	    // TODO Auto-generated method stub
-	    return null;
+		if (graph == null) {
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
+		}
+
+		List<Consumer> ret = new ArrayList<Consumer>();
+		for (EnergyNode node : graph.getNodes()) {
+			if (node instanceof Consumer) {
+				ret.add((Consumer) node);
+			}
+		}
+		return ret;
 	}
 
 	@Override
 	public String getTeamIdentifier() {
-	    // TODO Auto-generated method stub
-	    return null;
+		return "Musterloesung";
 	}
-
-
-	@Override
-	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

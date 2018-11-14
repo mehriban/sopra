@@ -23,18 +23,17 @@ public class QuicksortImpl<T> implements ExerciseSubmission, Quicksort<T> {
 	public int partition(T[] arr, int left, int right) {
 		if (arr == null)
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
-		if (left < 0 || right > arr.length-1)
+		if (left < 0 || left > arr.length - 1 || right > arr.length-1 || right < 0)
 			throw new IllegalArgumentException("Left or Right are invalid.");
-		
 		
 		int leftPosition = left;
 		int rightPosition = right;
 		int pivotPosition = (left + right)/2;
 		T pivot = arr[pivotPosition];
 		while (leftPosition <= rightPosition) {
-			while (comparator.compare(arr[leftPosition], pivot) == -1)
+			while (comparator.compare(arr[leftPosition], pivot) < 0)
 				leftPosition++;
-			while (comparator.compare(arr[rightPosition], pivot) == 1)
+			while (comparator.compare(arr[rightPosition], pivot) > 0)
 				rightPosition--;
 			if (leftPosition <= rightPosition) {
 				T helpVariable = arr[leftPosition];
@@ -44,6 +43,7 @@ public class QuicksortImpl<T> implements ExerciseSubmission, Quicksort<T> {
 				rightPosition--;
 			}
 		}
+		
 		return leftPosition;
 	}
 
@@ -51,9 +51,8 @@ public class QuicksortImpl<T> implements ExerciseSubmission, Quicksort<T> {
 	public void quicksort(T[] arr, int left, int right) {
 		if (arr == null)
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
-		if (left < 0 || right > arr.length-1)
+		if (left < 0 || left > arr.length - 1 || right > arr.length-1 || right < 0)
 			throw new IllegalArgumentException("Left or Right are invalid.");
-		
 		if (left < right) {
 			int leftPosition = partition(arr, left, right);
 			quicksort(arr, left, leftPosition-1);

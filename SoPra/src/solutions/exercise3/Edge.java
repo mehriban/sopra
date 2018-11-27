@@ -11,35 +11,22 @@ import org.sopra.api.model.CapacityEdge;
  *
  */
 abstract class Edge<V> implements ExerciseSubmission, CapacityEdge<V>{
-
-	/**
-	 * 
-	 */
 	protected V start;
 	protected V end;
-	protected int capacity ;
+	protected int capacity;
 	
-	public int getCapacity()
-	{
-		return this.capacity;
-	}
+	public abstract int getCapacity();
 	
-	public V getStart() 
-	{
-		return this.start;
-	}
+	public abstract V getStart();
 	
-	public V getEnd() 
-	{
-		return this.end;
-	}
+	public abstract V getEnd();
 
-	public void setCapacity(int cap) {
-		this.capacity = cap;
-		
-	}
-
+	public abstract void setCapacity(int cap);
 	
+	@Override
+	public String getTeamIdentifier() {
+		return "G06T02";
+	}
 	
 	
 }

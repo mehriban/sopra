@@ -16,7 +16,7 @@ public class FlowEdgeImpl<V> extends Edge<V> implements FlowEdge<V>, ExerciseSub
 	private int flow;
 	
 	public FlowEdgeImpl(V start, V end, int capacity) {
-		this.flow = 0;
+		setFlow(0);
 		super.start = start;
 		super.end = end;
 		super.capacity = capacity;
@@ -24,6 +24,8 @@ public class FlowEdgeImpl<V> extends Edge<V> implements FlowEdge<V>, ExerciseSub
 	
 	@Override
 	public void setCapacity(int capacity) {
+		if (capacity < 0)
+			throw new IllegalArgumentException("Capacity can not be negative");
 		super.capacity = capacity;
 	}
 	
@@ -49,6 +51,8 @@ public class FlowEdgeImpl<V> extends Edge<V> implements FlowEdge<V>, ExerciseSub
 
 	@Override
 	public void setFlow(int flow) {
+		if (flow < 0)
+			throw new IllegalArgumentException("Flow can not be negative");
 		this.flow = flow;
 	}
 	

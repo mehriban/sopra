@@ -11,7 +11,6 @@ import java.util.Set;
 import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise3.FlowEdge;
 import org.sopra.api.exercises.exercise3.FlowGraph;
-import org.sopra.api.model.Edge;
 
 public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 
@@ -21,20 +20,24 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 		this.graph = new HashMap<V, Map<V, FlowEdge<V>>>();
 	}
 	
+	// Adds new node to graph if node does not already exist. If node is added returns true, else returns false.
 	@Override
 	public boolean addNode(V node) {
 		if (node == null) {
-			throw new IllegalArgumentException("Argument should not be null.");
+			return false;
 		}
 		// we add the node to the graph if the graph does not contain it yet
-		if (!containsNode(node)) {
+		if (graph.get(node) == null) {
 			graph.put(node, new HashMap<V, FlowEdge<V>>());
 			return true;
 		}
 		else 
 			return false;
 	}
-
+	
+	// Adds a new FlowEdge to a start and a destination node with initial flow of 0.
+	// If either start or destination node does not exist in graph, throws an NoSuchElementException. 
+	// Returns the existing edge if the edge already exists.
 	@Override
 	public FlowEdge<V> addEdge(V start, V end, int capacity) {
 		Map<V, FlowEdge<V>> startEdges = graph.get(start);
@@ -46,7 +49,8 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 		graph.put(start, startEdges);
 		return newEdge;
 	}
-
+	
+	// Returns true if the given node is contained in the graph. Otherwise returns false
 	@Override
 	public boolean containsNode(V node) {
 		if (node == null) {
@@ -59,21 +63,24 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 			return false;
 		}
 	}
-
+	
+	// Returns all edges from given node. If the node is not given in the graph, throws a NoSuchElementException
 	@Override
 	public Collection<FlowEdge<V>> edgesFrom(V node) {
-		if (node == null) {
+		if (node == null || graph.get(node) == null) {
 			throw new IllegalArgumentException("Argument can not be null.");
 		}
 		List<FlowEdge<V>> originalEdges = this.getEdges();
-		List<FlowEdge<V>> resultingEdges = this.getEdges();
+		List<FlowEdge<V>> resultingEdges = new ArrayList<FlowEdge<V>>();
 		for (FlowEdge<V> currentEdge : originalEdges) {
-			if (currentEdge.getStart() == node || currentEdge.getEnd() == node)
+			if (currentEdge.getStart() == node)
 				resultingEdges.add(currentEdge);
 		}
 		return resultingEdges;
 	}
-
+	
+	// Returns a FlowEdge going from start to end. 
+	// Returns null if FlowEdge is not present or at least one parameter is null.
 	@Override
 	public FlowEdge<V> getEdge(V start, V end) {
 		if (start == null || end == null)
@@ -85,7 +92,8 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 		}
 		return null;
 	}
-
+	
+	// Returns list of all edges from graph.
 	@Override
 	public List<FlowEdge<V>> getEdges() {
 		Collection<Map<V, FlowEdge<V>>> allValues = graph.values();
@@ -95,7 +103,8 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission {
 		}
 		return resultingEdges;
 	}
-
+	
+	// Returns a set of all nodes from graph.
 	@Override
 	public Set<V> getNodes() {
 		return graph.keySet();

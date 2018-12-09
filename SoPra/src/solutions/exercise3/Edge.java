@@ -1,45 +1,40 @@
-/**
- * 
- */
 package solutions.exercise3;
 
 import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.model.CapacityEdge;
 
-/**
- * @author Mehriban Malik
- *
- */
-abstract class Edge<V> implements ExerciseSubmission, CapacityEdge<V>{
+abstract class Edge<V> implements CapacityEdge<V>, ExerciseSubmission{
 
-	/**
-	 * 
-	 */
-	protected V start;
-	protected V end;
-	protected int capacity ;
+    protected int capacity;
+    protected V startNode;
+    protected V endNode;
 	
-	public int getCapacity()
-	{
-		return this.capacity;
-	}
-	
-	public V getStart() 
-	{
-		return this.start;
-	}
-	
-	public V getEnd() 
-	{
-		return this.end;
-	}
+    @Override
+    public V getStart() {
+	return startNode;
+    }
 
-	public void setCapacity(int cap) {
-		this.capacity = cap;
-		
-	}
+    @Override
+    public V getEnd() {
+	return endNode;
+    }
 
-	
-	
-	
+    @Override
+    public int getCapacity() {
+	return capacity;
+    }
+
+    @Override
+    public void setCapacity(int capacity) {
+	if (capacity < 0) {
+		throw new IllegalArgumentException("Capacity not allowed to be negative.");
+	}
+	this.capacity = capacity;
+    }
+
+    @Override
+    public String getTeamIdentifier() {
+	return "Musterloesung";
+    }
+    
 }

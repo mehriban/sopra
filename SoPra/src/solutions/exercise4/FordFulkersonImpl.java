@@ -27,20 +27,9 @@ public class FordFulkersonImpl<V> implements FordFulkerson<V> {
 
 	@Override
 	public Deque<ResidualEdge<V>> findPath(V start, V end, ResidualGraph<V> graph) {
-		if (start == null || end == null || graph == null) {
-			throw new IllegalArgumentException("Parameter(s) can not be null!");
-		}
-		//Vergleich seiten 10-15 in "Folien04.pdf"
-		Deque<ResidualEdge<V>> path = new LinkedList<ResidualEdge<V>>(); //Erreichbarkeitsbaum
-		Deque<V> queue = new LinkedList<V>(); //Warteschlange
-		
-		queue.add(start); //Startknoten zur Warteschlange hinzufügen
-		queue.poll(); //ersten knoten der Warteschlange entfernen unt returnen
-		path.addAll(graph.edgesFrom(start)); //alle kanten ausgehend vom erste knoten dem erreichbarkeitsbaum hinzufügen
-		
-		
-		
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }

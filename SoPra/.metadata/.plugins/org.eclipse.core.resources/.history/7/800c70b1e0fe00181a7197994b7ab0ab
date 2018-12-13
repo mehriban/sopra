@@ -1,0 +1,77 @@
+package solutions.exercise4;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+import org.sopra.api.exercises.ExerciseSubmission;
+import org.sopra.api.exercises.exercise3.FlowGraph;
+import org.sopra.api.exercises.exercise3.ResidualEdge;
+import org.sopra.api.exercises.exercise3.ResidualGraph;
+import org.sopra.api.exercises.exercise4.FordFulkerson;
+
+public class FordFulkersonImpl<V> implements FordFulkerson<V>, ExerciseSubmission {
+
+	@Override
+	public String getTeamIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void augmentPath(Deque<ResidualEdge<V>> path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void findMaxFlow(FlowGraph<V> graph, V start, V target) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Deque<ResidualEdge<V>> findPath(V start, V end, ResidualGraph<V> graph) {
+		if(start == null) 
+		{
+			throw new IllegalArgumentException("Parameter path is not allowed to be null!");
+		}
+		if(end == null) 
+		{
+			throw new IllegalArgumentException("Parameter path is not allowed to be null!");
+		}
+		if(graph == null) 
+		{
+			throw new IllegalArgumentException("Parameter path is not allowed to be null!");
+		}
+
+		V n = start; //Der betrachtete Anfangs-Knoten für eine Kante
+		Deque<ResidualEdge<V>> shortestPath = new ArrayDeque<ResidualEdge<V>>(); //der Küreste Pfad
+		
+		//mit dieser Schleife wird ein Pfad erzeugt und in shortestPath gespeichert
+		for(ResidualEdge<V> edge: graph.getEdges()) 
+		{
+			 {
+			
+				if(edge.getStart().equals(n) && edge.getCapacity()!=0) 
+					//Wenn der Startknoten und n übereinstimmen und die Kapazität nicht null ist 
+				{
+					shortestPath.addLast(edge);
+					n = edge.getEnd();
+				}
+				
+				else if(edge.getEnd().equals(end) && edge.getCapacity()!=0)  //abbrechen der Schleife. Kann man weglassen?
+				{
+					break;
+				}
+				else 
+				{
+					//wenn n != das Ende von Edge dann passiert nix
+				}				
+				
+			}
+		}
+		
+		return shortestPath; 
+		//Hier wird nur ein Pfad zurückgegeben. Um den kürzesten zu bekommen müsste man jetzt andere Pfade konstruieren und vergleichen nur wie? 
+	}
+}

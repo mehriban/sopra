@@ -10,38 +10,35 @@ import org.sopra.api.model.producer.ProducerType;
 
 public class PlayfieldElementComparator implements Comparator<PlayfieldElement>, ExerciseSubmission {
 
-	private final ProducerType type;
-	private final ConstructionCostCalculator calculator;
-	
-	public PlayfieldElementComparator(ProducerType type, Scenario scenario) {
-		if (type == null){
-			throw new NullPointerException("ProducerType is not allowed to be null");
-		}
-		else if(scenario == null){
-			throw new NullPointerException("Scenario is not allowed to be null");
-		}
+    private final ProducerType type;
+    private final ConstructionCostCalculator calculator;
 
-		this.type = type;
-		this.calculator = new ConstructionCostCalculatorImpl(scenario);
+    public PlayfieldElementComparator(ProducerType type, Scenario scenario) {
+	if (type == null) {
+	    throw new NullPointerException("ProducerType is not allowed to be null");
+	} else if (scenario == null) {
+	    throw new NullPointerException("Scenario is not allowed to be null");
 	}
 
-	@Override
-	public int compare(PlayfieldElement o1, PlayfieldElement o2) {
-		if (o1 == null || o2 == null) {
-			throw new NullPointerException("Arguments can't be null");
-		}
+	this.type = type;
+	this.calculator = new ConstructionCostCalculatorImpl(scenario);
+    }
 
-		// Calculate cost for combination of elements and types
-		double val1 = calculator.calculateCost(o1, type);
-		double val2 = calculator.calculateCost(o2, type);
-
-		// Reverse order
-		return -Double.compare(val1, val2);
+    @Override
+    public int compare(PlayfieldElement o1, PlayfieldElement o2) {
+	if (o1 == null || o2 == null) {
+	    throw new NullPointerException("Arguments can't be null");
 	}
 
-	@Override
-	public String getTeamIdentifier() {
-		return "Musterloesung";
-	}
+	double val1 = calculator.calculateCost(o1, type);
+	double val2 = calculator.calculateCost(o2, type);
+
+	return -Double.compare(val1, val2);
+    }
+
+    @Override
+    public String getTeamIdentifier() {
+	return "Musterloesung";
+    }
 
 }

@@ -14,8 +14,14 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 	@Override
 	public void executionPhase(Scenario scenario, int round) {
 		
-		boolean valid = false;
+		boolean valid1 = false; // is true if only Indus. and SolarPP
 		
+		boolean valid2 = false; // is true if amount of producers and consumers appropriate
+		
+		boolean valid3 = false; // is true if the PowerLine-Capacity is enough
+		
+		boolean valid = false; // is true if the scenario meets all requirements
+				
 		int count = 0;
 		
 		for(EnergyNode node: scenario.getGraph().getNodes())  //iteriere über alle Knoten des Graphen
@@ -34,7 +40,7 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 		//If total number of EnergyNodes equals count number 
 		if(count == scenario.getGraph().getNodes().size()) 
 		{
-			valid = true;
+			valid1 = true;
 		}
 		else 
 		{
@@ -42,13 +48,14 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 		}
 		
 		
-		// If Playfield is accepted 
-		if(valid) 
+		if(valid1 && valid2 && valid3) 
 		{
-			
+			valid = true; //scenario is accepted
 		}
+	
 		
 	}
+
 
 	@Override
 	public String getTeamIdentifier() {

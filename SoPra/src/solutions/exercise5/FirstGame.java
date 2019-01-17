@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
 import org.sopra.api.ConstructionCostCalculator;
 import org.sopra.api.Game;
 import org.sopra.api.Scenario;
@@ -19,7 +18,6 @@ import org.sopra.api.model.EnergyNode;
 import org.sopra.api.model.Graph;
 import org.sopra.api.model.PlantLocation;
 import org.sopra.api.model.PowerLine;
-import org.sopra.internal.model.producer.WindPowerPlantImpl;
 import org.sopra.api.model.producer.*;
 
 import solutions.exercise2.ConstructionCostCalculatorImpl;
@@ -72,12 +70,13 @@ public class FirstGame implements Game {
 		//build wind power plant on best location
 		int bestX = best.getPlayfieldElement().getXPos();
 		int bestY = best.getPlayfieldElement().getYPos();
-		EnergyNode wpp1 = new WindPowerPlantImpl(null, bestX, bestY);
+		
+		}
 		
 		//build wind power plant on second best location
-		int secondBestX = secondBest.getPlayfieldElement().getXPos();
+	    int secondBestX = secondBest.getPlayfieldElement().getXPos();
 		int secondBestY = secondBest.getPlayfieldElement().getYPos();
-		EnergyNode wpp2 = new WindPowerPlantImpl(null, secondBestX, secondBestY);
+		
 		
 		//find maxFlow
 		FlowGraph<Object> g = (FlowGraph) scenario.getGraph();

@@ -20,16 +20,10 @@ import org.sopra.api.model.producer.BioGasFiredPowerPlant;
 import org.sopra.api.model.producer.CoalFiredPowerPlant;
 import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.GasFiredPowerPlant;
+import org.sopra.api.model.producer.HydroPowerPlant;
 import org.sopra.api.model.producer.NuclearPowerPlant;
 import org.sopra.api.model.producer.ProducerType;
-import org.sopra.internal.game.command.CannotAssignCommandException;
-import org.sopra.internal.game.command.CannotExecuteCommandException;
-import org.sopra.internal.model.consumer.IndustrialParkImpl;
-import org.sopra.internal.model.producer.BioGasFiredPowerPlantImpl;
-import org.sopra.internal.model.producer.CoalFiredPowerPlantImpl;
-import org.sopra.internal.model.producer.HydroPowerPlantImpl;
-import org.sopra.internal.model.producer.NuclearPowerPlantImpl;
-import org.sopra.internal.model.producer.WindPowerPlantImpl;
+import org.sopra.api.model.producer.WindPowerPlant;
 
 import solutions.exercise1.ScenarioUtilImpl;
 
@@ -85,7 +79,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 				try {
 					scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-				} catch (CannotAssignCommandException e) {
+				} catch (Exception e) {
 					throw new RuntimeException("Error in round " + round + ".", e);
 				}
 			}
@@ -97,7 +91,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -107,7 +101,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, -amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -126,7 +120,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 				try {
 					scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-				} catch (CannotAssignCommandException e) {
+				} catch (Exception e) {
 					throw new RuntimeException("Error in round " + round + ".", e);
 				}
 			}
@@ -138,7 +132,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -148,7 +142,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, -amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -167,7 +161,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 				try {
 					scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-				} catch (CannotAssignCommandException e) {
+				} catch (Exception e) {
 					throw new RuntimeException("Error in round " + round + ".", e);
 				}
 			}
@@ -179,7 +173,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -188,7 +182,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 					Double amount = p.getMaximumEnergyLevel() * 0.4;
 					try {
 						scenario.getCommandFactory().createAdjustProducerCommand(p, -amount.intValue()).assign();
-					} catch (CannotAssignCommandException e) {
+					} catch (Exception e) {
 						throw new RuntimeException("Error in round " + round + ".", e);
 					}
 				}
@@ -205,7 +199,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 				int amount = 800;
 				try {
 					scenario.getCommandFactory().createAdjustConsumerCommand(p, -amount).assign();
-				} catch (CannotAssignCommandException e) {
+				} catch (Exception e) {
 					throw new RuntimeException("Error in round " + round + ".", e);
 				}
 			}
@@ -223,7 +217,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 					if (currentTime == 6) {
 						scenario.getCommandFactory().createAdjustConsumerCommand(p, amount).assign();
 					}
-				 } catch (CannotAssignCommandException e) {
+				 } catch (Exception e) {
 					 throw new RuntimeException("Error in round " + round + ".",e);
 				 }
 			}
@@ -251,7 +245,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 					scenario.getCommandFactory().createAdjustProducerCommand(p, controlAmount).assign();
 				}
 
-			} catch (CannotAssignCommandException e) {
+			} catch (Exception e) {
 				throw new RuntimeException("Error in round " + round + ".", e);
 			}
 		}
@@ -337,7 +331,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 		try {
 			scenario.getCommandFactory().createBuildPlantCommand(target, producerType)
 					.execute();
-		} catch (CannotExecuteCommandException e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Error during building producer plants.\n", e);
 		}
 	}
@@ -352,8 +346,8 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 			if (line.getType() == PowerLineType.LOW_VOLTAGE) {
 				try {
 					if ((start.getName() == "Stadt0" || end.getName() == "Stadt0")
-							&& (start instanceof HydroPowerPlantImpl
-									|| end instanceof HydroPowerPlantImpl)) {
+							&& (start instanceof HydroPowerPlant
+									|| end instanceof HydroPowerPlant)) {
 
 					} else if ((start.getXPos() == 6 || end.getXPos() == 6)
 							&& (start.getYPos() == 3 || end.getYPos() == 3)) {
@@ -363,32 +357,32 @@ public class ScenarioImpl implements Game, ExerciseSubmission {
 					else if ((start.getXPos() == 1 || start.getYPos() == 1)
 							&& (end.getXPos() == 1 || end.getYPos() == 1)) {
 
-					} else if (start instanceof HydroPowerPlantImpl
-							|| end instanceof HydroPowerPlantImpl) {
+					} else if (start instanceof HydroPowerPlant
+							|| end instanceof HydroPowerPlant) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
-					} else if (start instanceof NuclearPowerPlantImpl
-							|| end instanceof NuclearPowerPlantImpl) {
+					} else if (start instanceof NuclearPowerPlant
+							|| end instanceof NuclearPowerPlant) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
-					} else if (start instanceof WindPowerPlantImpl
-							|| end instanceof WindPowerPlantImpl) {
+					} else if (start instanceof WindPowerPlant
+							|| end instanceof WindPowerPlant) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
-					} else if (start instanceof CoalFiredPowerPlantImpl
-							|| end instanceof CoalFiredPowerPlantImpl) {
+					} else if (start instanceof CoalFiredPowerPlant
+							|| end instanceof CoalFiredPowerPlant) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
-					} else if (start instanceof BioGasFiredPowerPlantImpl
-							|| end instanceof BioGasFiredPowerPlantImpl) {
+					} else if (start instanceof BioGasFiredPowerPlant
+							|| end instanceof BioGasFiredPowerPlant) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
-					} else if (start instanceof IndustrialParkImpl
-							|| end instanceof IndustrialParkImpl) {
+					} else if (start instanceof IndustrialPark
+							|| end instanceof IndustrialPark) {
 						scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.MEDIUM_VOLTAGE)
 								.execute();
 					}
-				} catch (CannotExecuteCommandException e) {
+				} catch (Exception e) {
 					throw new RuntimeException("Error during upgrading power lines.\n", e);
 				}
 			}
